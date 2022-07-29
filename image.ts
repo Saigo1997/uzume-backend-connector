@@ -184,4 +184,14 @@ export class Image {
       throw e
     }
   }
+
+  public async patchImagesGroupSort(image_ids: string[]) {
+    try {
+      let res = await this.authorizeAxios().patch(`/group/sort`, { images: image_ids })
+      return;
+    } catch (e) {
+      console.log(`patch images group sort error [${e}]`)
+      throw e
+    }
+  }
 }
