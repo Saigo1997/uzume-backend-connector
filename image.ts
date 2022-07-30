@@ -14,6 +14,8 @@ export type ResImage = {
   author: string
   created_at: string
   tags: string[]
+  group_id: string
+  is_group_thumb_nail: boolean
 }
 
 export type ResImages = {
@@ -149,6 +151,46 @@ export class Image {
       return;
     } catch (e) {
       console.log(`image remove tag error [${e}]`)
+      throw e
+    }
+  }
+
+  public async addImagesToGroup(imageIds: string[]) {
+    try {
+      let res = await this.authorizeAxios().post(`/group`, { images: imageIds.join(',') })
+      return JSON.parse(JSON.stringify(res.data)) as ResImages
+    } catch (e) {
+      console.log(`add images to group error [${e}]`)
+      throw e
+    }
+  }
+
+  public async deleteImagesFromGroup(groupId: string) {
+    try {
+      let res = await this.authorizeAxios().delete(`/group/${groupId}`)
+      return;
+    } catch (e) {
+      console.log(`delete images from group error [${e}]`)
+      throw e
+    }
+  }
+
+  public async getGroupedImages(groupId: string) {
+    try {
+      let res = await this.authorizeAxios().get(`/group/${groupId}`)
+      return JSON.parse(JSON.stringify(res.data)) as ResImages
+    } catch (e) {
+      console.log(`get grouped images error [${e}]`)
+      throw e
+    }
+  }
+
+  public async patchImagesGroupSort(image_ids: string[]) {
+    try {
+      let res = await this.authorizeAxios().patch(`/group/sort`, { images: image_ids })
+      return;
+    } catch (e) {
+      console.log(`patch images group sort error [${e}]`)
       throw e
     }
   }
