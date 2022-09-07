@@ -18,7 +18,7 @@ class BackendStatus {
 export class BackendConnector {
   // バージョン設定
   private static backendMinorVersion = '0.0'
-  static latestBackendVersion = `${BackendConnector.backendMinorVersion}.4`
+  static latestBackendVersion = `${BackendConnector.backendMinorVersion}.5`
 
   static loggingEnable = true
   static backendStatus = BackendStatus.INIT
